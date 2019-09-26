@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.juanmello.springbootmongo.domain.Post;
 import com.juanmello.springbootmongo.domain.User;
+import com.juanmello.springbootmongo.dto.AuthorDTO;
 import com.juanmello.springbootmongo.repository.PostRepository;
 import com.juanmello.springbootmongo.repository.UserRepository;
 
@@ -35,10 +36,12 @@ public class Instantiation implements CommandLineRunner {
 		User kung = new User(null, "Kung Lao", "kung@gmail.com");
 		User shang = new User(null, "Shang Tsung", "shang@gmail.com");
 		
-		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu Viagem", "Vou viajar para São Paulo. Abraços!", liu);
-		Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", liu);
-		
 		userRepository.saveAll(Arrays.asList(liu, kung, shang));
+		
+		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu Viagem", "Vou viajar para São Paulo. Abraços!", new AuthorDTO(liu));
+		Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(liu));
+		
+		
 		postRepository.saveAll(Arrays.asList(post1, post2));
 	}
 
